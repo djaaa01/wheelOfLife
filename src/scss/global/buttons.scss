@@ -1,0 +1,19 @@
+.btn {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid transparent;
+
+  &__primary {
+    background-color: #424242;
+  }
+
+  &__secondary {
+    border-color: #424242;
+  }
+}

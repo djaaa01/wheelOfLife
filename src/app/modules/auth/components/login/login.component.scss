@@ -1,0 +1,35 @@
+.login-wrapper {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+
+  .login {
+    margin-top: 400px;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    height: fit-content;
+
+    &__logo {
+      font-size: 20px;
+      text-align: center;
+    }
+
+    &__form {
+      background-color: #212121;
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
+      &__actions {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+  }
+}

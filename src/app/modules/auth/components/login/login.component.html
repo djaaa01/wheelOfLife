@@ -1,7 +1,6 @@
 <div class="login-wrapper">
   <div class="login">
     <div class="login__logo">
-      <img src="../../../../../assets/images/logo.svg" alt="" />
       <span>Wheel Of Life</span>
     </div>
     <div class="login__form">
@@ -21,11 +20,11 @@
         <div
           (keydown.enter)="onLogin()"
           (click)="onLogin()"
-          class="btn btn__full btn__primary"
+          class="btn btn__primary"
         >
           <span>Login</span>
         </div>
-        <div routerLink="/register" class="login__form__register">
+        <div routerLink="/register" class="btn btn__secondary">
           <span>Register</span>
         </div>
       </div>
