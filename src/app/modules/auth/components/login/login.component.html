@@ -1,0 +1,34 @@
+<div class="login-wrapper">
+  <div class="login">
+    <div class="login__logo">
+      <img src="../../../../../assets/images/logo.svg" alt="" />
+      <span>Wheel Of Life</span>
+    </div>
+    <div class="login__form">
+      <input
+        autocomplete="new-email"
+        [(ngModel)]="email"
+        type="email"
+        placeholder="Email"
+      />
+      <input
+        autocomplete="new-password"
+        [(ngModel)]="password"
+        type="password"
+        placeholder="Password"
+      />
+      <div class="login__form__actions">
+        <div
+          (keydown.enter)="onLogin()"
+          (click)="onLogin()"
+          class="btn btn__full btn__primary"
+        >
+          <span>Login</span>
+        </div>
+        <div routerLink="/register" class="login__form__register">
+          <span>Register</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
