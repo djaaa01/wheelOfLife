@@ -10,8 +10,6 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 
-
-
 const firebaseConfig = {
   apiKey: 'AIzaSyBbYKULE_E9wn9wLnqvMe0cLhExMsbbsmU',
   authDomain: 'wheeloflife-37af1.firebaseapp.com',
@@ -34,6 +32,6 @@ const firebaseConfig = {
   ],
   providers: [{ provide: FIREBASE_OPTIONS, useValue: firebaseConfig }],
   bootstrap: [AppComponent],
-  exports: [],
+  exports: [NgApexchartsModule],
 })
 export class AppModule {}

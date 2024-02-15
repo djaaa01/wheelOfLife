@@ -3,10 +3,18 @@ import { CommonModule } from '@angular/common';
 
 import { MainRoutingModule } from './main-routing.module';
 import { MainComponent } from './main.component';
-import { HomeComponent } from './components/home/home.component';
+import { MainMenuComponent } from './components/main-menu/main-menu.component';
+import { NotesComponent } from './components/notes/notes.component';
+import { WheelOfLifeComponent } from './components/wheel-of-life/wheel-of-life.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 @NgModule({
-  declarations: [HomeComponent, MainComponent],
-  imports: [CommonModule, MainRoutingModule],
+  declarations: [
+    MainComponent,
+    MainMenuComponent,
+    NotesComponent,
+    WheelOfLifeComponent,
+  ],
+  imports: [CommonModule, MainRoutingModule, NgApexchartsModule],
 })
 export class MainModule {}

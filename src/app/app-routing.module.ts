@@ -7,7 +7,7 @@ import {
 } from '@angular/fire/auth-guard';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
-const redirectLoggedInToHome = () => redirectLoggedInTo(['main']);
+const redirectLoggedInToHome = () => redirectLoggedInTo(['wheel-of-life']);
 
 const routes: Routes = [
   {
