@@ -9,6 +9,13 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
+import { NotifierModule } from 'angular-notifier';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBbYKULE_E9wn9wLnqvMe0cLhExMsbbsmU',
@@ -25,12 +32,34 @@ const firebaseConfig = {
     BrowserModule,
     FormsModule,
     AppRoutingModule,
+    MatDialogModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
     NgApexchartsModule,
+    NotifierModule,
+    NotifierModule.withConfig({
+      position: {
+        horizontal: {
+          position: 'right',
+        },
+        vertical: {
+          position: 'top',
+        },
+      },
+    }),
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
+    BrowserAnimationsModule,
   ],
-  providers: [{ provide: FIREBASE_OPTIONS, useValue: firebaseConfig }],
+  providers: [
+    { provide: FIREBASE_OPTIONS, useValue: firebaseConfig },
+    {
+      provide: MAT_DIALOG_DEFAULT_OPTIONS,
+      useValue: { autoFocus: false },
+    },
+  ],
   bootstrap: [AppComponent],
   exports: [NgApexchartsModule],
 })

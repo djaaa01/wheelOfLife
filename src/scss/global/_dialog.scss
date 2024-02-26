@@ -1,0 +1,19 @@
+.mat-mdc-dialog-container .mdc-dialog__surface {
+    background-color: transparent !important;
+    border-radius: 4px !important;
+}
+
+.cdk-overlay-dark-backdrop {
+    background: rgb(0 0 0 / 52%) !important;
+}
+
+
+.cdk-global-overlay-wrapper {
+    display: flex;
+    position: absolute;
+    z-index: 1000;
+    overflow: auto;
+    pointer-events: auto;
+    padding: 20px 0;
+    height: calc(100vh - 40px);
+}

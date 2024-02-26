@@ -4,28 +4,13 @@
       <span>Wheel Of Life</span>
     </div>
     <form [formGroup]="registerForm" class="register__form">
-      <input
-        formControlName="email"
-        autocomplete="new-email"
-        type="email"
-        placeholder="Email"
-      />
-      <input
-        formControlName="password"
-        autocomplete="false"
-        autocomplete="new-password"
-        type="password"
-        placeholder="Password"
-      />
-      <input
-        formControlName="confirmPassword"
-        autocomplete="false"
-        type="password"
-        autocomplete="new-password"
-        placeholder="Confirm Password"
-      />
+      <input formControlName="email" autocomplete="new-email" type="email" placeholder="Email" />
+      <input formControlName="password" autocomplete="false" autocomplete="new-password" type="password"
+        placeholder="Password" />
+      <input formControlName="confirmPassword" autocomplete="false" type="password" autocomplete="new-password"
+        placeholder="Confirm Password" />
       <div class="register__form__actions">
-        <div (click)="onRegister()" class="btn btn__full btn__primary">
+        <div [class.loading]="isLoading" (click)="onRegister()" class="btn btn__full btn__primary">
           <span>Register</span>
         </div>
         <div routerLink="/login" class="btn btn__secondary">

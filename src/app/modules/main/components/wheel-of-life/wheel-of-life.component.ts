@@ -1,50 +1,57 @@
-import { Component, ViewChild } from '@angular/core';
-
-import { ChartComponent } from 'ng-apexcharts';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { AddWheelOfLifeComponent } from '../add-wheel-of-life/add-wheel-of-life.component';
+import { WheelOfLifeService } from '../../core/services/wheel-of-life.service';
+import {
+  WheelOfLife,
+  WheelOfLifeSegment,
+} from '../../core/models/wheel-of-life.model';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-wheel-of-life',
   templateUrl: './wheel-of-life.component.html',
   styleUrls: ['./wheel-of-life.component.scss'],
 })
-export class WheelOfLifeComponent {
-  @ViewChild('chart') chart: ChartComponent;
-  chartOptions: any;
+export class WheelOfLifeComponent implements OnInit {
+  wheelOfLifeSegments: WheelOfLifeSegment[];
 
-  constructor() {
-    this.chartOptions = {
-      series: [42, 39, 35, 29, 26],
-      chart: {
-        type: 'polarArea',
-      },
-      // labels: ['Rose A', 'Rose B', 'Rose C', 'Rose D', 'Rose E'],
-      fill: {
-        opacity: 1,
-      },
-      stroke: {
-        width: 1,
-        colors: undefined,
-      },
-      yaxis: {
-        show: false,
-      },
-      legend: {
-        position: 'right',
-      },
-      plotOptions: {
-        polarArea: {
-          rings: {
-            strokeWidth: 0,
-          },
-        },
-      },
-      theme: {
-        monochrome: {
-          //    enabled: true,
-          shadeTo: 'light',
-          shadeIntensity: 0.6,
-        },
-      },
-    };
+  constructor(
+    private dialog: MatDialog,
+    private readonly wheelOfLifeService: WheelOfLifeService
+  ) {}
+
+  ngOnInit(): void {
+    this.setWheel();
+  }
+
+  setWheel(): void {
+    this.wheelOfLifeService
+      .getWheelOfLife()
+      .pipe(take(1))
+      .subscribe((response) => {
+        var wheelOfLife = response.filter(
+          (item: WheelOfLife) => !item.referralId
+        )[0];
+
+        if (wheelOfLife) {
+          this.wheelOfLifeService
+            .getSegments(wheelOfLife?.id as string)
+            .pipe(take(1))
+            .subscribe((segments) => {
+              this.wheelOfLifeSegments = segments;
+            });
+        }
+      });
+  }
+
+  addWheelOfLife(): void {
+    const dialogRef = this.dialog.open(AddWheelOfLifeComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.setWheel();
+      }
+    });
   }
 }

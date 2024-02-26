@@ -1,6 +1,6 @@
 .btn {
   height: 50px;
-  width: 100%;
+  width: calc(100% - 40px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,12 +8,21 @@
   cursor: pointer;
   user-select: none;
   border: 1px solid transparent;
+  padding: 0 20px;
 
   &__primary {
     background-color: #424242;
+
+    &:hover {
+      background-color: #42424285;
+    }
   }
 
   &__secondary {
     border-color: #424242;
+
+    &:hover {
+      border-color: white;
+    }
   }
 }

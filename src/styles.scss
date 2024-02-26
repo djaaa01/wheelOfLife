@@ -1,7 +1,14 @@
+@use "@angular/material" as mat;
+@include mat.core();
+@include mat.core();
+
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
+@import "node_modules/angular-notifier/styles";
 @import "./scss/global/inputs";
+@import "./scss/global/dialog";
 @import "./scss/global/buttons";
+@import "./scss/global/loading";
 
 body {
   font-family: "Roboto", sans-serif;
@@ -9,4 +16,22 @@ body {
   padding: 0;
   background-color: #161616;
   color: white;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }

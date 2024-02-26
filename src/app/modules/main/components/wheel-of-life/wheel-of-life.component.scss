@@ -1,4 +1,53 @@
+.wheel-of-life-wrapper {
+  width: 700px;
+  margin: 0 auto;
+  margin-top: 30px;
+  background-color: #2c2c2c;
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  // margin-bottom: 20px;
+}
+
 .wheel-of-life {
-    width: 700px;
+  background-color: #373737;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+
+  &__chart {
     margin: 0 auto;
+  }
+
+  &__legend {
+    padding: 0 8px 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    &__item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background-color: black;
+      border-radius: 4px;
+      padding: 2px 6px;
+      user-select: none;
+      cursor: pointer;
+
+      &__label {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+    }
+  }
 }

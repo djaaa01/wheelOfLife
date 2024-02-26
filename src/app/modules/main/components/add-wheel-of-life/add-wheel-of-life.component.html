@@ -1,0 +1,70 @@
+<div class="add-wheel-of-life">
+  <div class="add-wheel-of-life__title">
+    <span>Create wheel of life</span>
+    <img
+      (click)="onClose()"
+      draggable="false"
+      src="../../../../../assets/icons/xmark-solid.svg"
+      alt=""
+    />
+  </div>
+  <div [formGroup]="projectForm" class="add-section">
+    <div class="add-section__sections">
+      <div formArrayName="items" class="add-section__sections__names">
+        <div
+          *ngFor="let item of items.controls; let i = index"
+          [formGroupName]="i"
+          class="add-section__sections__names__item"
+        >
+          <input
+            type="text"
+            formControlName="sectionName"
+            [class.input--invalid]="
+              item.get('sectionName')?.hasError('required') &&
+              item.get('sectionName')?.touched
+            "
+            placeholder="Section Name"
+            class="input input--border-gray"
+          />
+          <input
+            [class.input--invalid]="
+              item.get('sectionScore')?.hasError('required') &&
+              item.get('sectionScore')?.touched
+            "
+            placeholder="Score"
+            formControlName="sectionScore"
+            type="number"
+          />
+          <input
+            [class.input--invalid]="
+              item.get('sectionColor')?.hasError('required') &&
+              item.get('sectionColor')?.touched
+            "
+            formControlName="sectionColor"
+            type="color"
+          />
+          <div
+            (click)="items.length > 1 && items.removeAt(i)"
+            class="remove-item"
+          >
+            <img
+              draggable="false"
+              src="../../../../../assets/icons/trash-solid.svg"
+              alt=""
+            />
+          </div>
+        </div>
+        <div class="add-section__sections__names__item">
+          <div (click)="addItem()" class="btn btn__secondary">Add Section</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    [class.loading]="isLoading"
+    (click)="onCreate()"
+    class="create btn btn__primary"
+  >
+    Create
+  </div>
+</div>

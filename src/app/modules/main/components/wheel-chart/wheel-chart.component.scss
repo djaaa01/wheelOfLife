@@ -1,0 +1,9 @@
+.wheel-chart {
+    width: fit-content;
+
+    ::ng-deep {
+        .label {
+            padding: 8px;
+        }
+    }
+}

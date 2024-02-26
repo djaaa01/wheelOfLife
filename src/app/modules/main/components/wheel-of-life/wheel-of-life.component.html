@@ -1,16 +1,34 @@
-<div class="wheel-of-life">
-  <div class="wheel-of-life__chart">
-    <apx-chart
-      [series]="chartOptions.series"
-      [chart]="chartOptions.chart"
-      [labels]="chartOptions.labels"
-      [title]="chartOptions.title"
-      [theme]="chartOptions.theme"
-      [fill]="chartOptions.fill"
-      [yaxis]="chartOptions.yaxis"
-      [stroke]="chartOptions.stroke"
-      [legend]="chartOptions.legend"
-      [plotOptions]="chartOptions.plotOptions"
-    ></apx-chart>
+<div class="wheel-of-life-wrapper">
+  <div class="info">
+    <div class="info-left">
+      <span>Wheel of life</span>
+    </div>
+    <div class="info-right">
+      <div (click)="addWheelOfLife()" class="btn btn__secondary">
+        <span>Create</span>
+        <!-- <span>Edit</span> -->
+      </div>
+    </div>
+  </div>
+  <div *ngIf="wheelOfLifeSegments?.length" class="wheel-of-life">
+    <div class="wheel-of-life__chart">
+      <app-wheel-chart
+        [wheelOfLifeSegments]="wheelOfLifeSegments"
+      ></app-wheel-chart>
+    </div>
+    <div class="wheel-of-life__legend">
+      <div
+        *ngFor="let item of wheelOfLifeSegments"
+        class="wheel-of-life__legend__item"
+        [ngStyle]="{ background: item.sectionColor }"
+      >
+        <div class="wheel-of-life__legend__item__label">
+          <span>{{ item.sectionName }}</span>
+        </div>
+        <div class="wheel-of-life__legend__item__info">
+          <span>{{ item.sectionScore }}</span>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

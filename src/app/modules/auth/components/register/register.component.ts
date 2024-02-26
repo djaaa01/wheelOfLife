@@ -10,12 +10,13 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
+  isLoading = false;
 
   constructor(
     private fb: FormBuilder,
     private readonly authService: AuthService,
     private readonly router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
@@ -43,10 +44,13 @@ export class RegisterComponent implements OnInit {
       this.registerForm.controls['confirmPassword'].setErrors(null);
     }
 
+    this.isLoading = true;
     this.authService
       .register(this.registerForm.value.email, this.registerForm.value.password)
       .then(() => {
+        this.isLoading = false;
         this.router.navigateByUrl('/main');
-      });
+      }, () =>
+        this.isLoading = false);
   }
 }

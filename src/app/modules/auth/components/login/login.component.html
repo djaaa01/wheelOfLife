@@ -4,24 +4,10 @@
       <span>Wheel Of Life</span>
     </div>
     <div class="login__form">
-      <input
-        autocomplete="new-email"
-        [(ngModel)]="email"
-        type="email"
-        placeholder="Email"
-      />
-      <input
-        autocomplete="new-password"
-        [(ngModel)]="password"
-        type="password"
-        placeholder="Password"
-      />
+      <input autocomplete="new-email" [(ngModel)]="email" type="email" placeholder="Email" />
+      <input autocomplete="new-password" [(ngModel)]="password" type="password" placeholder="Password" />
       <div class="login__form__actions">
-        <div
-          (keydown.enter)="onLogin()"
-          (click)="onLogin()"
-          class="btn btn__primary"
-        >
+        <div [class.loading]="isLoading" (keydown.enter)="onLogin()" (click)="onLogin()" class="btn btn__primary">
           <span>Login</span>
         </div>
         <div routerLink="/register" class="btn btn__secondary">

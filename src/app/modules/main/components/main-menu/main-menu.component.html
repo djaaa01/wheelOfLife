@@ -25,10 +25,24 @@
   </div>
   <div class="main-menu__right">
     <div class="main-menu__right__item">
-      <span>Nume</span>
+      <span>{{ email }}</span>
     </div>
     <div class="main-menu__right__item">
-      <img width="20" src="../../../../../assets/icons/user-solid.svg" alt="" />
+      <img
+        draggable="false"
+        [matMenuTriggerFor]="beforeMenu"
+        width="20"
+        src="../../../../../assets/icons/user-solid.svg"
+        alt=""
+      />
+
+      <mat-menu #beforeMenu="matMenu" xPosition="before">
+        <div class="menu">
+          <div (click)="onLogout()" class="menu__item">
+            <span>Logout</span>
+          </div>
+        </div>
+      </mat-menu>
     </div>
   </div>
 </div>
