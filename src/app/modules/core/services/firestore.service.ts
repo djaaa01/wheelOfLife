@@ -20,11 +20,7 @@ import { FirestoreCollections } from '../enums/firestore-colections.enum';
   providedIn: 'root',
 })
 export class FirestoreService {
-  constructor(
-    private firestore: Firestore,
-    private readonly authService: AuthService
-  ) {}
-  currentUser = this.authService.getCurrentUse()?.uid;
+  constructor(private firestore: Firestore) {}
 
   async addCollectionData<T>(
     collectionName: FirestoreCollections,
@@ -39,11 +35,11 @@ export class FirestoreService {
     collectionName: string,
     field: string,
     condition: WhereFilterOp,
-    value?: string
+    value: string
   ): Observable<T[]> {
     const q = query(
       collection(this.firestore, collectionName),
-      where(field, condition, value || this.currentUser)
+      where(field, condition, value)
     );
     const getColectionData = collectionData(q, { idField: 'id' });
 

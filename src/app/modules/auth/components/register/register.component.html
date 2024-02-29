@@ -1,16 +1,51 @@
 <div class="register-wrapper">
   <div class="register">
     <div class="register__logo">
+      <img width="32" src="assets/icons/chart-pie-solid.svg" alt="" />
       <span>Wheel Of Life</span>
     </div>
     <form [formGroup]="registerForm" class="register__form">
-      <input formControlName="email" autocomplete="new-email" type="email" placeholder="Email" />
-      <input formControlName="password" autocomplete="false" autocomplete="new-password" type="password"
-        placeholder="Password" />
-      <input formControlName="confirmPassword" autocomplete="false" type="password" autocomplete="new-password"
-        placeholder="Confirm Password" />
+      <input
+        formControlName="email"
+        autocomplete="new-email"
+        type="email"
+        placeholder="Email"
+        [class.input--invalid]="
+          !!registerForm.get('email')?.errors?.['email'] ||
+          registerForm.get('email')?.hasError('required') &&
+          registerForm.get('email')?.touched
+        "
+      />
+      <input
+        formControlName="password"
+        autocomplete="false"
+        autocomplete="new-password"
+        type="password"
+        placeholder="Password"
+        [class.input--invalid]="
+          !!registerForm.get('password')?.errors?.['error'] ||
+          registerForm.get('password')?.hasError('required') &&
+          registerForm.get('password')?.touched
+        "
+      />
+      <input
+        formControlName="confirmPassword"
+        autocomplete="false"
+        type="password"
+        autocomplete="new-password"
+        placeholder="Confirm Password"
+        [class.input--invalid]="
+        !!registerForm.get('confirmPassword')?.errors?.['error'] ||
+        registerForm.get('confirmPassword')?.hasError('required') &&
+        registerForm.get('confirmPassword')?.touched
+        "
+      />
       <div class="register__form__actions">
-        <div [class.loading]="isLoading" (click)="onRegister()" class="btn btn__full btn__primary">
+        <div
+          [class.loading]="isLoading"
+          (click)="onRegister()"
+          class="btn btn__full btn__primary"
+        >
           <span>Register</span>
         </div>
         <div routerLink="/login" class="btn btn__secondary">

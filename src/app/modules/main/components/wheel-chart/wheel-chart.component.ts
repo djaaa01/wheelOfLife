@@ -33,11 +33,6 @@ export class WheelChartComponent implements OnInit {
       labels.push(element.sectionName);
       colors.push(element.sectionColor);
     });
-
-    console.log(wheelOfLifeSegments);
-    console.log(series);
-    console.log(labels);
-    console.log(colors);
     this.chartOptions = {
       series: series,
       labels: labels,

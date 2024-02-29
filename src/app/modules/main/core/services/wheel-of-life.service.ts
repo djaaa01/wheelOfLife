@@ -14,11 +14,12 @@ import { Observable } from 'rxjs';
 export class WheelOfLifeService {
   constructor(private readonly firestoreService: FirestoreService) {}
 
-  getWheelOfLife(): Observable<WheelOfLife[]> {
+  getWheelOfLife(uid: string): Observable<WheelOfLife[]> {
     return this.firestoreService.getCollention<WheelOfLife>(
       FirestoreCollections.wheelOfLife,
       'uid',
-      '=='
+      '==',
+      uid
     );
   }
 

@@ -7,6 +7,7 @@ import {
   WheelOfLifeSegment,
 } from '../../core/models/wheel-of-life.model';
 import { take } from 'rxjs';
+import { AuthService } from 'src/app/modules/auth/auth.service';
 
 @Component({
   selector: 'app-wheel-of-life',
@@ -18,7 +19,8 @@ export class WheelOfLifeComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    private readonly wheelOfLifeService: WheelOfLifeService
+    private readonly wheelOfLifeService: WheelOfLifeService,
+    private readonly authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -27,7 +29,7 @@ export class WheelOfLifeComponent implements OnInit {
 
   setWheel(): void {
     this.wheelOfLifeService
-      .getWheelOfLife()
+      .getWheelOfLife(this.authService.getCurrentUse()?.uid as string)
       .pipe(take(1))
       .subscribe((response) => {
         var wheelOfLife = response.filter(
