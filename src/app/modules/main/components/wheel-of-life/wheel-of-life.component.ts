@@ -28,6 +28,7 @@ export class WheelOfLifeComponent implements OnInit {
   }
 
   setWheel(): void {
+    this.wheelOfLifeSegments = [];
     this.wheelOfLifeService
       .getWheelOfLife(this.authService.getCurrentUse()?.uid as string)
       .pipe(take(1))
@@ -47,8 +48,10 @@ export class WheelOfLifeComponent implements OnInit {
       });
   }
 
-  addWheelOfLife(): void {
-    const dialogRef = this.dialog.open(AddWheelOfLifeComponent);
+  addWheelOfLife(isEdit: boolean): void {
+    const dialogRef = this.dialog.open(AddWheelOfLifeComponent, {
+      data: this.wheelOfLifeSegments,
+    });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {

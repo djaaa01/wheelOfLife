@@ -4,9 +4,11 @@
       <span>Wheel of life</span>
     </div>
     <div class="info-right">
-      <div (click)="addWheelOfLife()" class="btn btn__secondary">
-        <span>Create</span>
-        <!-- <span>Edit</span> -->
+      <div
+        (click)="addWheelOfLife((wheelOfLifeSegments.length || 0) > 0)"
+        class="btn btn__secondary"
+      >
+        <span>{{ wheelOfLifeSegments.length ? "Edit" : "Create" }}</span>
       </div>
     </div>
   </div>

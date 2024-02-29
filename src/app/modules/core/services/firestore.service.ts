@@ -31,6 +31,11 @@ export class FirestoreService {
     return dataRef as T;
   }
 
+  update(collectionName: FirestoreCollections, data: any): Promise<void> {
+    const collectionRef = doc(this.firestore, `${collectionName}/${data.id}`);
+    return setDoc(collectionRef, Object.assign({}, data));
+  }
+
   getCollention<T>(
     collectionName: string,
     field: string,

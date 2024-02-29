@@ -13,10 +13,10 @@ const routes: Routes = [
         path: 'wheel-of-life',
         component: WheelOfLifeComponent,
       },
-      {
-        path: 'notes',
-        component: NotesComponent,
-      },
+      // {
+      //   path: 'notes',
+      //   component: NotesComponent,
+      // },
       { path: '**', redirectTo: 'wheel-of-life', pathMatch: 'full' },
     ],
   },

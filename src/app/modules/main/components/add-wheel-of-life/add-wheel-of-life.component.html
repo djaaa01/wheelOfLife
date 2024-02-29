@@ -1,6 +1,6 @@
 <div class="add-wheel-of-life">
   <div class="add-wheel-of-life__title">
-    <span>Create wheel of life</span>
+    <span>{{ isEdit ? "Edit" : "Create" }} wheel of life</span>
     <img
       (click)="onClose()"
       draggable="false"
@@ -47,11 +47,7 @@
             (click)="items.length > 1 && items.removeAt(i)"
             class="remove-item"
           >
-            <img
-              draggable="false"
-              src="assets/icons/trash-solid.svg"
-              alt=""
-            />
+            <img draggable="false" src="assets/icons/trash-solid.svg" alt="" />
           </div>
         </div>
         <div class="add-section__sections__names__item">
@@ -65,6 +61,6 @@
     (click)="onCreate()"
     class="create btn btn__primary"
   >
-    Create
+    {{ isEdit ? "Edit" : "Create" }}
   </div>
 </div>

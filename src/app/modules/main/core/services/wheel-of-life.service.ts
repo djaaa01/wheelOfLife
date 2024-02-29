@@ -47,4 +47,11 @@ export class WheelOfLifeService {
       wheelOfLifeData
     );
   }
+
+  updateSegment(data: WheelOfLifeSegment): Promise<void> {
+    return this.firestoreService.update(
+      FirestoreCollections.wheelOfLifeSegments,
+      data
+    );
+  }
 }
