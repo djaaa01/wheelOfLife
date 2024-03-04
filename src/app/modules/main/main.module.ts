@@ -11,6 +11,8 @@ import { WheelChartComponent } from './components/wheel-chart/wheel-chart.compon
 import { AddWheelOfLifeComponent } from './components/add-wheel-of-life/add-wheel-of-life.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatMenuModule } from '@angular/material/menu';
+import { NoteDetailsComponent } from './components/note-details/note-details.component';
+import { NgxEditorModule } from 'ngx-editor';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,16 @@ import { MatMenuModule } from '@angular/material/menu';
     WheelOfLifeComponent,
     WheelChartComponent,
     AddWheelOfLifeComponent,
+    NoteDetailsComponent,
   ],
-  imports: [CommonModule, MainRoutingModule, NgApexchartsModule, FormsModule, ReactiveFormsModule, MatMenuModule],
+  imports: [
+    NgxEditorModule,
+    CommonModule,
+    MainRoutingModule,
+    NgApexchartsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatMenuModule,
+  ],
 })
-export class MainModule { }
+export class MainModule {}

@@ -8,6 +8,7 @@ import {
 } from '../../core/models/wheel-of-life.model';
 import { take } from 'rxjs';
 import { AuthService } from 'src/app/modules/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-wheel-of-life',
@@ -20,7 +21,8 @@ export class WheelOfLifeComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private readonly wheelOfLifeService: WheelOfLifeService,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private readonly router: Router
   ) {}
 
   ngOnInit(): void {
@@ -46,6 +48,20 @@ export class WheelOfLifeComponent implements OnInit {
             });
         }
       });
+  }
+
+  onSegment(event: MouseEvent, segment: WheelOfLifeSegment): void {
+    if (event.button === 0) {
+      console.log(segment);
+
+      this.router.navigate([`/notes/${segment.id}`]);
+    }
+
+    if (event.button === 1) {
+      const routePath = `/notes/${segment.id}`;
+      const url = window.location.origin + routePath;
+      window.open(url, '_blank');
+    }
   }
 
   addWheelOfLife(isEdit: boolean): void {

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './main.component';
 import { NotesComponent } from './components/notes/notes.component';
 import { WheelOfLifeComponent } from './components/wheel-of-life/wheel-of-life.component';
+import { NoteDetailsComponent } from './components/note-details/note-details.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
       //   path: 'notes',
       //   component: NotesComponent,
       // },
+      {
+        path: 'notes/:id',
+        component: NoteDetailsComponent,
+      },
       { path: '**', redirectTo: 'wheel-of-life', pathMatch: 'full' },
     ],
   },

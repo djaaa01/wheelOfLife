@@ -16,6 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { NotifierModule } from 'angular-notifier';
+import { NgxEditorModule } from 'ngx-editor';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBbYKULE_E9wn9wLnqvMe0cLhExMsbbsmU',
@@ -33,6 +34,7 @@ const firebaseConfig = {
     FormsModule,
     AppRoutingModule,
     MatDialogModule,
+    NgxEditorModule,
     MatMenuModule,
     MatIconModule,
     MatButtonModule,

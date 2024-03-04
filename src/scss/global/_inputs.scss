@@ -16,6 +16,7 @@ input {
 }
 
 input[type="color"] {
+  cursor: pointer;
   padding-left: unset;
   padding: 3px;
   width: calc(100% - 6px);

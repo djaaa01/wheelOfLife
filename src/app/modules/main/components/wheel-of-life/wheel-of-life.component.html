@@ -21,6 +21,8 @@
     <div class="wheel-of-life__legend">
       <div
         *ngFor="let item of wheelOfLifeSegments"
+        (click)="onSegment($event, item)"
+        (auxclick)="onSegment($event, item)"
         class="wheel-of-life__legend__item"
         [ngStyle]="{ background: item.sectionColor }"
       >
