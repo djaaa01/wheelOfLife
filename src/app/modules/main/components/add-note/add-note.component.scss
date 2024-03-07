@@ -1,0 +1,97 @@
+.add-note {
+  width: 700px;
+  height: fit-content;
+  background-color: #212121;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+
+  &__title {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    margin-bottom: 24px;
+
+    img {
+      display: flex;
+      width: 16px;
+      cursor: pointer;
+      position: absolute;
+      right: -5px;
+      padding: 5px;
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__actions {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+.remove-item {
+  background-color: #2c2c2c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 53px;
+  width: 53px;
+  border-radius: 4px;
+  cursor: pointer;
+  user-select: none;
+
+  img {
+    width: 16px;
+  }
+}
+
+ngx-editor-menu {
+  margin-bottom: 8px;
+}
+
+::ng-deep {
+  .NgxEditor {
+    background-color: #2c2c2c !important;
+    color: #fff !important;
+    border-radius: 4px !important;
+    border: 1px solid transparent !important;
+
+    &__MenuBar {
+      background-color: unset !important;
+      margin-bottom: 8px;
+    }
+
+    &__MenuItem {
+      cursor: pointer;
+      transition: unset !important;
+
+      &:hover {
+        background-color: #42424285 !important;
+      }
+    }
+
+    &__Content {
+      padding: 20px !important;
+      min-height: 100px !important;
+      font-size: 14px;
+    }
+  }
+}
+
+.text-editor-invalid {
+  ::ng-deep {
+    .NgxEditor {
+      border: 1px solid red !important;
+    }
+  }
+}

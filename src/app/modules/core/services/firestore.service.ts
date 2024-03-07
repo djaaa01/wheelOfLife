@@ -8,12 +8,13 @@ import {
   setDoc,
   query,
   where,
-  docData,
   deleteDoc,
   WhereFilterOp,
+  getDoc,
+  getDocs,
+  deleteField,
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { AuthService } from '../../auth/auth.service';
 import { FirestoreCollections } from '../enums/firestore-colections.enum';
 
 @Injectable({
@@ -29,6 +30,23 @@ export class FirestoreService {
     const collectionRef = collection(this.firestore, collectionName);
     const dataRef = await addDoc(collectionRef, { ...data });
     return dataRef as T;
+  }
+
+  async deleteDocumentById(
+    collectionName: FirestoreCollections,
+    docId: string
+  ): Promise<void> {
+    const docRef = doc(this.firestore, `${collectionName}/${docId}`);
+    await deleteDoc(docRef);
+  }
+
+  async getDocumentById<T>(
+    collectionName: FirestoreCollections,
+    docId: string
+  ): Promise<T> {
+    const docRef = doc(this.firestore, `${collectionName}/${docId}`);
+    const docSnap = await getDoc(docRef);
+    return docSnap.data() as T;
   }
 
   update(collectionName: FirestoreCollections, data: any): Promise<void> {

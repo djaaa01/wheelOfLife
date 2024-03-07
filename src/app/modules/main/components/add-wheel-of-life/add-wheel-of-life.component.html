@@ -8,7 +8,7 @@
       alt=""
     />
   </div>
-  <div [formGroup]="projectForm" class="add-section">
+  <div [formGroup]="addWheelOfLifeForm" class="add-section">
     <div class="add-section__sections">
       <div formArrayName="items" class="add-section__sections__names">
         <div
@@ -44,7 +44,7 @@
             type="color"
           />
           <div
-            (click)="items.length > 1 && items.removeAt(i)"
+            (click)="items.length > 1 && onRemoveItem(i)"
             class="remove-item"
           >
             <img draggable="false" src="assets/icons/trash-solid.svg" alt="" />

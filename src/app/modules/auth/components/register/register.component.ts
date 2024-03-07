@@ -45,7 +45,6 @@ export class RegisterComponent implements OnInit {
         this.registerForm.controls['password'].value !==
         this.registerForm.controls['confirmPassword'].value
       ) {
-        console.log('intra?');
         this.registerForm.controls['password'].setErrors({ error: true });
         this.registerForm.controls['confirmPassword'].setErrors({
           error: true,

@@ -26,7 +26,7 @@ export class LoginComponent {
       this.authService.login(this.email, this.password).then(
         () => {
           this.isLoading = false;
-          this.router.navigate(['/goals']);
+          this.router.navigate(['/wheel-of-life']);
         },
         () => {
           this.notifier.notify('error', 'Something went wrong.');

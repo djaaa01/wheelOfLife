@@ -5,6 +5,8 @@ import { WheelOfLifeService } from '../../core/services/wheel-of-life.service';
 import { AuthService } from 'src/app/modules/auth/auth.service';
 import { WheelOfLifeSegment } from '../../core/models/wheel-of-life.model';
 import { NotifierService } from 'angular-notifier';
+import { FirestoreService } from 'src/app/modules/core/services/firestore.service';
+import { FirestoreCollections } from 'src/app/modules/core/enums/firestore-colections.enum';
 
 @Component({
   selector: 'app-add-wheel-of-life',
@@ -12,22 +14,24 @@ import { NotifierService } from 'angular-notifier';
   styleUrls: ['./add-wheel-of-life.component.scss'],
 })
 export class AddWheelOfLifeComponent implements OnInit {
-  projectForm: FormGroup;
+  addWheelOfLifeForm: FormGroup;
   isLoading: boolean = false;
   isEdit: boolean = false;
+  removeItems: WheelOfLifeSegment[] = [];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public wheelOfLifeSegments: WheelOfLifeSegment[],
-    private fb: FormBuilder,
     private readonly dialogRef: MatDialogRef<AddWheelOfLifeComponent>,
+    private fb: FormBuilder,
     private readonly wheelOfLifeService: WheelOfLifeService,
     private readonly authService: AuthService,
-    private readonly notifier: NotifierService
+    private readonly notifier: NotifierService,
+    private readonly firestoreService: FirestoreService
   ) {}
 
   ngOnInit(): void {
     this.isEdit = this.wheelOfLifeSegments?.length > 0;
-    this.projectForm = this.fb.group({
+    this.addWheelOfLifeForm = this.fb.group({
       items: this.fb.array([]),
     });
 
@@ -43,7 +47,7 @@ export class AddWheelOfLifeComponent implements OnInit {
   }
 
   get items(): FormArray {
-    return this.projectForm.get('items') as FormArray;
+    return this.addWheelOfLifeForm.get('items') as FormArray;
   }
 
   addItem(): void {
@@ -59,7 +63,7 @@ export class AddWheelOfLifeComponent implements OnInit {
   }
 
   onCreate(): void {
-    if (this.projectForm.valid) {
+    if (this.addWheelOfLifeForm.valid) {
       this.isLoading = true;
 
       if (this.isEdit) {
@@ -68,7 +72,7 @@ export class AddWheelOfLifeComponent implements OnInit {
         this.createWheelOfLife();
       }
     } else {
-      this.markFormGroupTouched(this.projectForm);
+      this.markFormGroupTouched(this.addWheelOfLifeForm);
 
       this.items.controls.forEach((itemControl: any) => {
         this.markFormGroupTouched(itemControl);
@@ -87,35 +91,45 @@ export class AddWheelOfLifeComponent implements OnInit {
   }
 
   editSegments(): void {
-    console.log(this.projectForm.value.items);
     const promises: Promise<any>[] = [];
 
-    this.projectForm.value.items.forEach((element: WheelOfLifeSegment) => {
-      if (element?.id) {
-        promises.push(
-          this.wheelOfLifeService.updateSegment({
-            ...element,
-            sectionName: element.sectionName,
-            sectionColor: element.sectionColor,
-            sectionScore: element.sectionScore,
-          })
-        );
-      } else {
-        promises.push(
-          this.wheelOfLifeService.addWheelOfLifeSegment({
-            uid: this.authService.getCurrentUse()?.uid,
-            sectionName: element.sectionName,
-            sectionColor: element.sectionColor,
-            sectionScore: element.sectionScore,
-            wheelOfLifeId: this.projectForm.value.items.find(
-              (element: WheelOfLifeSegment) => element.hasOwnProperty('id')
-            ).wheelOfLifeId,
-            createdDate: new Date(),
-          })
-        );
+    this.addWheelOfLifeForm.value.items.forEach(
+      (element: WheelOfLifeSegment) => {
+        if (element?.id) {
+          promises.push(
+            this.wheelOfLifeService.updateSegment({
+              ...element,
+              sectionName: element.sectionName,
+              sectionColor: element.sectionColor,
+              sectionScore: element.sectionScore,
+            })
+          );
+        } else {
+          promises.push(
+            this.wheelOfLifeService.addWheelOfLifeSegment({
+              uid: this.authService.getCurrentUse()?.uid,
+              sectionName: element.sectionName,
+              sectionColor: element.sectionColor,
+              sectionScore: element.sectionScore,
+              wheelOfLifeId: this.addWheelOfLifeForm.value.items.find(
+                (element: WheelOfLifeSegment) => element.hasOwnProperty('id')
+              ).wheelOfLifeId,
+              createdDate: new Date(),
+            })
+          );
+        }
       }
+    );
+
+    this.removeItems.forEach((element) => {
+      promises.push(
+        this.firestoreService.deleteDocumentById(
+          FirestoreCollections.wheelOfLifeSegments,
+          element.id as string
+        )
+      );
     });
-    console.log(promises);
+
     Promise.all(promises).then(
       (response: any) => {
         this.isLoading = false;
@@ -140,7 +154,7 @@ export class AddWheelOfLifeComponent implements OnInit {
         (response) => {
           const promises: Promise<any>[] = [];
 
-          this.projectForm.value.items.forEach(
+          this.addWheelOfLifeForm.value.items.forEach(
             (element: WheelOfLifeSegment) => {
               promises.push(
                 this.wheelOfLifeService.addWheelOfLifeSegment({
@@ -187,5 +201,12 @@ export class AddWheelOfLifeComponent implements OnInit {
         })
       );
     });
+  }
+
+  onRemoveItem(i: number): void {
+    if (this.items?.value[i]?.id) {
+      this.removeItems.push(this.items.value[i]);
+    }
+    this.items.removeAt(i);
   }
 }

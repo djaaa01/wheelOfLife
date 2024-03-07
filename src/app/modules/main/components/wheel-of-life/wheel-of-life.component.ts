@@ -52,8 +52,6 @@ export class WheelOfLifeComponent implements OnInit {
 
   onSegment(event: MouseEvent, segment: WheelOfLifeSegment): void {
     if (event.button === 0) {
-      console.log(segment);
-
       this.router.navigate([`/notes/${segment.id}`]);
     }
 

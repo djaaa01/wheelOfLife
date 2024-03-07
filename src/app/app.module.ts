@@ -59,7 +59,7 @@ const firebaseConfig = {
     { provide: FIREBASE_OPTIONS, useValue: firebaseConfig },
     {
       provide: MAT_DIALOG_DEFAULT_OPTIONS,
-      useValue: { autoFocus: false },
+      useValue: { autoFocus: false, position: { top: '50px' } },
     },
   ],
   bootstrap: [AppComponent],

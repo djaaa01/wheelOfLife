@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatMenuModule } from '@angular/material/menu';
 import { NoteDetailsComponent } from './components/note-details/note-details.component';
 import { NgxEditorModule } from 'ngx-editor';
+import { AddNoteComponent } from './components/add-note/add-note.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { NgxEditorModule } from 'ngx-editor';
     WheelChartComponent,
     AddWheelOfLifeComponent,
     NoteDetailsComponent,
+    AddNoteComponent,
   ],
   imports: [
     NgxEditorModule,

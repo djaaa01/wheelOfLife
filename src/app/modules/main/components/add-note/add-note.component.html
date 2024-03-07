@@ -1,0 +1,43 @@
+<div class="add-note">
+  <div class="add-note__title">
+    <span>{{ isEdit ? "Edit" : "Add" }} note</span>
+    <img
+      (click)="onClose()"
+      draggable="false"
+      src="assets/icons/xmark-solid.svg"
+      alt=""
+    />
+  </div>
+  <div [formGroup]="addNoteForm" class="add-note__form">
+    <div class="add-note__form__item">
+      <input
+        [class.input--invalid]="
+          addNoteForm.get('title')?.hasError('required') &&
+          addNoteForm.get('title')?.touched
+        "
+        type="text"
+        formControlName="title"
+        placeholder="Title"
+        class="input input--border-gray"
+      />
+    </div>
+    <div
+      [class.text-editor-invalid]="
+        addNoteForm.get('note')?.hasError('required') &&
+        addNoteForm.get('note')?.touched
+      "
+      class="add-note__form__item"
+    >
+      <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
+      <ngx-editor [editor]="editor" formControlName="note"> </ngx-editor>
+    </div>
+  </div>
+  <div class="add-note__actions">
+    <div *ngIf="isEdit" (click)="onDelete()" class="add btn btn__secondary">
+      Delete
+    </div>
+    <div [class.loading]="isLoading" (click)="onAdd()" class="btn btn__primary">
+      {{ isEdit ? "Edit" : "Add" }}
+    </div>
+  </div>
+</div>

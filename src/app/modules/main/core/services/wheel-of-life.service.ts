@@ -7,6 +7,7 @@ import {
 import { FirestoreService } from 'src/app/modules/core/services/firestore.service';
 import { FirestoreCollections } from 'src/app/modules/core/enums/firestore-colections.enum';
 import { Observable } from 'rxjs';
+import { NoteSegment } from '../models/note-segment.model';
 
 @Injectable({
   providedIn: 'root',
@@ -32,6 +33,22 @@ export class WheelOfLifeService {
     );
   }
 
+  getSegment(segmentId: string): Promise<WheelOfLifeSegment> {
+    return this.firestoreService.getDocumentById<WheelOfLifeSegment>(
+      FirestoreCollections.wheelOfLifeSegments,
+      segmentId
+    );
+  }
+
+  getNoteSegments(segmentId: string): Observable<NoteSegment[]> {
+    return this.firestoreService.getCollention<NoteSegment>(
+      FirestoreCollections.noteSegments,
+      'segmentId',
+      '==',
+      segmentId
+    );
+  }
+
   createWheelOfLife(
     wheelOfLifeData?: WheelOfLife
   ): Promise<WheelOfLifeResponse> {
@@ -48,9 +65,23 @@ export class WheelOfLifeService {
     );
   }
 
+  addNoteSegment(noteSegmentData?: NoteSegment): Promise<any> {
+    return this.firestoreService.addCollectionData<any>(
+      FirestoreCollections.noteSegments,
+      noteSegmentData
+    );
+  }
+
   updateSegment(data: WheelOfLifeSegment): Promise<void> {
     return this.firestoreService.update(
       FirestoreCollections.wheelOfLifeSegments,
+      data
+    );
+  }
+
+  updateNote(data: NoteSegment): Promise<void> {
+    return this.firestoreService.update(
+      FirestoreCollections.noteSegments,
       data
     );
   }
